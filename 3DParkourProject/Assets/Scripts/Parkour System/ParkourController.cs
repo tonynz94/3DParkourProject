@@ -65,6 +65,11 @@ public class ParkourController : MonoBehaviour
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, action.TargetRotation, playerController.RotationSpeed * Time.deltaTime);
             }
 
+            if(action.EnableTargetMatching)
+            {
+                MatchTarget(action);
+            }
+
             yield return null;
         }
 
@@ -72,5 +77,14 @@ public class ParkourController : MonoBehaviour
     //여기를 넘어온거는 애니메이션이 끝났다는것
         inAction = false;
         playerController.SetControl(true);
+    }
+
+    //한번만 실행해주면 된다.
+    void MatchTarget(ParkourAction action)
+    {
+        if (animator.isMatchingTarget) return;
+
+        //(매치할 위치, 로테이션, 매치할 부위, 적용할(x,y,z), 시작시간, 소요시간) 
+        animator.MatchTarget(action.MatchPos, transform.rotation, action.MatchBodyPart, new MatchTargetWeightMask(Vector3.up, 0), action.MatchStartTime, action.MatchTargetTime);
     }
 }

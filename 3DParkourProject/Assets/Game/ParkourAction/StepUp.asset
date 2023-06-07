@@ -16,3 +16,7 @@ MonoBehaviour:
   minHeight: 0.3
   maxHeight: 0.8
   rotateToObstacle: 0
+  enableTargetMatching: 1
+  matchBodyPart: 3
+  matchStartTime: 0.2
+  matchTargetTime: 0.48
