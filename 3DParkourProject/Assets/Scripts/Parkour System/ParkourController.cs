@@ -46,6 +46,7 @@ public class ParkourController : MonoBehaviour
         playerController.SetControl(false);
         //crossFade를 이용해서 애니메이션을 변경하면 바로 변경되지 않는다. 
         //그래서 다음꺼 애니메이션으로 검사를 해야 아래 StepUp 애니메이션이 선택된다.
+        animator.SetBool("mirrorAction", action.Mirror);
         animator.CrossFade(action.AnimName, 0.2f);
 
         //CrossFade는 이 프레임 끝나고 StepUp으로 이동하게 된다.(그래야 GetNextAnimatorStateInfo에서 StepUp를 검사할 수 있다.
@@ -70,9 +71,15 @@ public class ParkourController : MonoBehaviour
                 MatchTarget(action);
             }
 
+            if(animator.IsInTransition(0) && timer > 0.5f)
+            {
+                break;
+            }
+
             yield return null;
         }
 
+        yield return new WaitForSeconds(action.PoseActionDelay);
     //---------------------------------
     //여기를 넘어온거는 애니메이션이 끝났다는것
         inAction = false;
@@ -85,6 +92,11 @@ public class ParkourController : MonoBehaviour
         if (animator.isMatchingTarget) return;
 
         //(매치할 위치, 로테이션, 매치할 부위, 적용할(x,y,z), 시작시간, 소요시간) 
-        animator.MatchTarget(action.MatchPos, transform.rotation, action.MatchBodyPart, new MatchTargetWeightMask(Vector3.up, 0), action.MatchStartTime, action.MatchTargetTime);
+        animator.MatchTarget(
+            action.MatchPos, 
+            transform.rotation, action.MatchBodyPart, 
+            new MatchTargetWeightMask(action.MatchPosWeight, 0),
+            action.MatchStartTime, 
+            action.MatchTargetTime);
     }
 }

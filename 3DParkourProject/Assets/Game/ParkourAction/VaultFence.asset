@@ -9,16 +9,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 353a883f84e58374da16fcd799f7a561, type: 3}
-  m_Name: StepUp
+  m_Script: {fileID: 11500000, guid: d0298d0cf25f46f46bdb622087e62719, type: 3}
+  m_Name: VaultFence
   m_EditorClassIdentifier: 
-  animName: StepUp
-  minHeight: 0.3
-  maxHeight: 0.8
+  animName: VaultFence
+  minHeight: 0.8
+  maxHeight: 1.2
   rotateToObstacle: 0
   enableTargetMatching: 1
-  matchBodyPart: 3
-  matchStartTime: 0.2
-  matchTargetTime: 0.48
+  matchBodyPart: 0
+  matchStartTime: 0.12
+  matchTargetTime: 0.32
   poseActionDelay: 0
-  matchPosWeight: {x: 0, y: 1, z: 0}
+  matchPosWeight: {x: 0, y: 1, z: 1}
+  ObstcalTag: Fence
+  Mirror: 0
